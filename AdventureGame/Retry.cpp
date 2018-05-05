@@ -7,14 +7,17 @@ using namespace std;
 class PartyMember
 {
 	public:
-		PartyMember(int S, int A, int M, string N) : Name(N), Strength(S), Agility(A), Magika(M) {}
+		PartyMember(int S, int A, int I, string N) : Name(N), Strength(S), Agility(A), Intelect(I) {}
 		static PartyMember* make_member(int Choice, string N);
 		virtual void Shout(void) = 0;
+		bool StrengthTest(int Pass){return Pass <= Strength;}
+		bool AgilityTest(int Pass){return Pass <= Agility;}
+		bool IntelectTest(int Pass){return Pass <= Intelect;}
 	private:
 		string Name;
 		int Strength;
 		int Agility;
-		int Magika;
+		int Intelect;
 };
 
 class Warrior : public PartyMember
@@ -48,20 +51,28 @@ PartyMember* PartyMember::make_member(int Choice, string N)
 	case 2: 	
 		return new Mage(N);
 	}
+	return NULL;
 }
 
 PartyMember* Setup(void)
 {
+	
+	vector<string> AllClasses = {"1. Warrior", "2. Mage"};
+	
 	cout << "Hello, welcome to the Bearded Woman, the best tavern in the land!" << endl;
 	cout << "Mind introducing yourself stranger? What's your name?" << endl;
 	string Name;
 	cin >> Name;	
 	cout << "Well then " + Name + ", what are you known to be?" << endl;
+	for (string C : AllClasses)
+	{
+		cout << C << endl;
+	}
 	int Choice;
 	cin >> Choice;
 	do
 	{
-		if (Choice <= 2 && Choice >= 1)
+		if (Choice <= static_cast<int>(AllClasses.size()) && Choice >= 1)
 		{
 			return PartyMember::make_member(Choice, Name);
 		}
@@ -78,5 +89,6 @@ int main(void)
 	vector<PartyMember*> Party;
 	Party.push_back(Setup());
 	Party[0]->Shout();
+	cout << Party[0]->StrengthTest(8) << endl;
 	return 0;
 }
