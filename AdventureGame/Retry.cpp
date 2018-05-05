@@ -7,7 +7,7 @@ using namespace std;
 class PartyMember
 {
 	public:
-		PartyMember(int S, int A, int M, string N) : Strength(S), Agility(A), Magika(M), Name(N) {}
+		PartyMember(int S, int A, int M, string N) : Name(N), Strength(S), Agility(A), Magika(M) {}
 		static PartyMember* make_member(int Choice, string N);
 		virtual void Shout(void) = 0;
 	private:
