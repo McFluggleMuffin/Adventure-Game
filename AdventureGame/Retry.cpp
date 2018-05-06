@@ -111,6 +111,7 @@ void QuestOneIntro(vector<PartyMember*> Party)
 	switch (Choice_1)
 	{
 		case 1:
+			cout << "Aww well" << endl;
 			Choice_2 = QuestOneIntro_One(void);
 		case 2:
 			cout << "A smart one you are, well, I'll tell you more then" << endl;
@@ -124,12 +125,13 @@ void QuestOneIntro(vector<PartyMember*> Party)
 			cout << "2. Of course, anything for a fellow citizen of the realm" << endl;
 		case 3:
 			cout << "Ok, well there is a cave full of spiders in the woods to the east, get rid of them and I'll pay you a king's randsom" << endl;
+			Choice_2 = QuestOneIntro_One(void);
 		case default:
 	}
 }
 int QuestOneIntro_One(void)
 {
-	cout << "Aww well. A room is 2 silver pieces a night, or 10 for the nicer rooms at the top" << endl;
+	cout << "A room is 2 silver pieces a night, or 10 for the nicer rooms at the top" << endl;
 	cout << "1. Hand over 2 silver for a room" << endl;
 	cout << "2. Pay the 10, it's been a long day on the road, you want the nicer bed" << endl;
 	cout << "3. You don't need the room, you're just here for a drink" << endl;  
