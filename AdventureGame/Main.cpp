@@ -127,6 +127,23 @@ int QuestOneIntro_One(bool discount)
 	cin >> Choice;
 	return Choice;
 }
+bool QuestOneIntro_Two(void)
+{
+	cout << "If you're looking for a drink, the bar is just around the corner there" << endl;
+	cout << "1. Head up to your room, you need the sleep" << endl;
+	cout << "2. A drink at the bar sounds good" << endl;
+	int Choice;
+	cin >> Choice;
+	switch (Choice)	
+	{
+		case 1:
+			return true;	
+			break;
+		case 2:
+			return false;	
+			break;
+	}
+}
 bool QuestOneIntro(vector<PartyMember*> Party)
 {
 	bool Accepted = false;
@@ -186,6 +203,7 @@ bool QuestOneIntro(vector<PartyMember*> Party)
 		LowPrice = {0, 2, 0};
 		HighPrice = {0, 10, 0};
 	}		
+	bool BarOrBed;
 	switch (Choice_2)
 	{
 		case 1:
