@@ -1,4 +1,4 @@
 all:
 	clear
-	g++ -Wall -std=c++11 Retry.cpp -o test.exe
+	g++ -Wall -std=c++11 Main.cpp -o test.exe
 	./test.exe
