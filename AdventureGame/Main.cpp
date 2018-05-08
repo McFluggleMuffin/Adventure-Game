@@ -4,6 +4,11 @@
 
 using namespace std;
 
+void LeaveSpace(void)
+{
+	cout << string(50, '\n');
+}
+
 class Wallet
 {
 	public:
@@ -125,6 +130,7 @@ void QuestOneIntro_One(bool discount, PartyMember* Adventurer)
 		LowPricev = {0, 2, 0};
 		HighPricev = {0, 10, 0};
 	}
+	LeaveSpace();
 	cout << "A room is " + LowPrice + " pieces a night, or " + HighPrice + " for the nicer rooms at the top" << endl;
 	cout << "1. Hand over " + LowPrice + " for a room" << endl;
 	cout << "2. Pay the " + HighPrice + ", it's been a long day on the road, you want the nicer bed" << endl;
@@ -149,6 +155,7 @@ void QuestOneIntro_One(bool discount, PartyMember* Adventurer)
 }
 bool QuestOneIntro_Two(void)
 {
+	LeaveSpace();
 	cout << "If you're looking for a drink, the bar is just around the corner there" << endl;
 	cout << "1. Head up to your room, you need the sleep" << endl;
 	cout << "2. A drink at the bar sounds good" << endl;
@@ -167,6 +174,7 @@ bool QuestOneIntro_Two(void)
 bool QuestOneIntro(vector<PartyMember*> Party)
 {
 	bool Accepted = false;
+	LeaveSpace();
 	cout << "Nice to meet you, I'm Gregor Karlsson, innkeeper here at the Bearded Woman." << endl;
 	cout << "Say, an adventurer like yourself wouldn't be looking for a job would you, put a little cash in your pocket?" << endl;
 	cout << "1. Politely decline, you don't need the money anyway" << endl;
