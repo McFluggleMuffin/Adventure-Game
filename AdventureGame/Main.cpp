@@ -89,7 +89,7 @@ Player* InitialEncounter(void)
 {
 	
 	vector<string> AllClasses = {"1. Warrior", "2. Mage"};
-	
+	LeaveSpace();	
 	cout << "Hello, welcome to the Bearded Woman, the best tavern in the land!" << endl;
 	cout << "Mind introducing yourself stranger? What's your name?" << endl;
 	string Name;
@@ -117,7 +117,7 @@ Player* InitialEncounter(void)
 	while(true);
 }
 
-void QuestOneIntro_One(bool discount, Player* _player)
+int QuestOneIntro_One(bool discount, Player* _player)
 {
 	if (discount)
 	{
@@ -133,6 +133,7 @@ void QuestOneIntro_One(bool discount, Player* _player)
 	}
 	cout << "3. You don't need the room, you're just here for a drink" << endl;  
 	int Choice;
+	int comfort = 0;
 	cin >> Choice;
 	LeaveSpace();
 	switch (Choice)
@@ -141,16 +142,19 @@ void QuestOneIntro_One(bool discount, Player* _player)
 			if (discount){_player->Pay(0, 0, 75);}
 			else {_player->Pay(0, 2, 0);}
 			cout << "Thanks, here's your key, you'll be in room 4" << endl;
+			comfort = 1;
 			break;
 		case 2:
 			if (discount){_player->Pay(0, 8, 0);}
 			else {_player->Pay(0, 10, 0);}
 			cout << "Thanks, here's your key, you'll be in room 12" << endl;
+			comfort = 2;
 			break;
 		case 3:
 			cout << "I see, well the bar is just around the corner, come back if you want to stay the night" << endl;
 			break;
 	}
+	return comfort;	
 }
 int ProcessTime(string time)
 {
@@ -177,9 +181,6 @@ void Sleep(string* Time, int Comfort)
 			
 			*Time = "Morning";
 			break;
-		default:
-			cout << "Please enter a valid choice" << endl;
-			break;
 	}
 }
 void QuestOneIntro_Bar(void)
@@ -202,7 +203,7 @@ void QuestOneIntro_Bar(void)
 			break;
 	}
 }
-void QuestOneIntro_Two(string* Time)
+void QuestOneIntro_Two(string* Time, int comfort)
 {
 	cout << "If you're looking for a drink, the bar is just around the corner there" << endl;
 	cout << "1. Head up to your room, you need the sleep" << endl;
@@ -213,7 +214,7 @@ void QuestOneIntro_Two(string* Time)
 	switch (Choice)	
 	{
 		case 1:
-			Sleep(Time, 2);
+			Sleep(Time, comfort);
 			break;
 		case 2:
 			QuestOneIntro_Bar();
@@ -268,9 +269,9 @@ bool QuestOneIntro(Player* _player, string* Time)
 			cout << "Ok, well there is a cave full of spiders in the woods to the east, get rid of them and I'll pay you a king's randsom" << endl;
 			Accepted = true;
 			break;
-	}
-	QuestOneIntro_One(discount, _player);
-	QuestOneIntro_Two(Time);
+	}	
+	int comfort = QuestOneIntro_One(discount, _player);
+	QuestOneIntro_Two(Time, comfort);
 	return Accepted;
 
 }
