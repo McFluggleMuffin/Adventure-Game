@@ -187,6 +187,26 @@ void Sleep(string* Time, int Comfort)
 			break;
 	}
 }
+void QuestOneIntro_Bar(void)
+{
+	cout << "The bar is just through the door on your left enjoy." << endl;
+	cout << "You walk through the door to discover the bar is full of people." << endl;
+	cout << "They're very joyful enjoying their mead, however one fellow in the corner seems to be sad." << endl;
+	cout << "1. Approach the fellow" << endl;
+	cout << "2. Get some mead (costs 10 bronze)" << endl;
+	cout << "3. Leave the bar and speak the inn-keeper" << endl;
+	int Choice;
+	cin >> Choice;
+	switch (Choice)
+	{
+		case 1:
+			break;
+		case 2:
+			break;
+		case 3:
+			break;
+	}
+}
 bool QuestOneIntro_Two(string* Time)
 {
 	LeaveSpace();
@@ -201,7 +221,7 @@ bool QuestOneIntro_Two(string* Time)
 			Sleep(Time, 2);
 			break;
 		case 2:
-			return false;	
+			QuestOneIntro_Bar();
 			break;
 	}	
 }
@@ -253,8 +273,10 @@ bool QuestOneIntro(vector<PartyMember*> Party, string* Time)
 			break;
 	}
 	QuestOneIntro_One(discount, Party[0]);
+
 	bool bar = QuestOneIntro_Two(Time);
 	return Accepted;
+
 }
 	
 
