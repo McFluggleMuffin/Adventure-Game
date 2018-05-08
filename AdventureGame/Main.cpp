@@ -33,6 +33,11 @@ class PartyMember
 			wallet.Silver -= S;
 			wallet.Bronze -= B;
 		}
+		void Regen(int HealthGain)
+		{
+			Health = Health + HealthGain;
+			if (Health > Strength * 2){Health = Strength * 2;}
+		}
 		Wallet wallet;
 	private:
 		string Name;
@@ -153,8 +158,27 @@ void QuestOneIntro_One(bool discount, PartyMember* Adventurer)
 			break;
 	}
 }
-void Sleep(string* Time)
+void ProcessTime(string time)
 {
+	switch (time)
+	{
+		case "Morning":
+			return 1;
+			break;
+		case "Noon":
+			return 2;
+			break;
+		case "Evening":
+			return 3;
+			break;
+		case "Midnight"
+			return 4;
+			break;
+	}
+}
+void Sleep(string* Time, int Comfort)
+{
+	//Morning >> Noon >> Evening >> Midnight >> Morning
 	cout << "It is currently " << Time << ", when would you like to sleep until?" << endl;
 	cout << "1. Midnight" << endl;
 	cout << "2. Morning" << endl;
@@ -166,6 +190,7 @@ void Sleep(string* Time)
 			*Time = "Midnight";
 			break;
 		case 2:
+			
 			*Time = "Morning";
 			break;
 		default:
@@ -259,7 +284,10 @@ bool QuestOneIntro(vector<PartyMember*> Party, string* Time)
 			break;
 	}
 	QuestOneIntro_One(discount, Party[0]);
-	bool bar = QuestOneIntro_Two(Time);
+
+	bool bar = QuestOneIntro_Two(*Time);
+	return Accepted;
+
 }
 	
 
@@ -270,6 +298,5 @@ int main(void)
 	vector<PartyMember*> Party;
 	Party.push_back(InitialEncounter());
 	bool QuestOneAccepted = QuestOneIntro(Party, pTime );
-	
 	return 0;
 }
