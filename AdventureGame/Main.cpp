@@ -163,12 +163,12 @@ void Sleep(string* Time)
 	switch (Choice)
 	{
 		case 1:
-			Time = "Midnight";
+			*Time = "Midnight";
 			break;
 		case 2:
-			Time = "Morning";
+			*Time = "Morning";
 			break;
-		case default:
+		default:
 			cout << "Please enter a valid choice" << endl;
 			break;
 	}
@@ -184,7 +184,7 @@ bool QuestOneIntro_Two(string* Time)
 	switch (Choice)	
 	{
 		case 1:
-		`	Sleep(Time);
+			Sleep(Time);
 			break;
 		case 2:
 			return false;	
@@ -239,16 +239,16 @@ bool QuestOneIntro(vector<PartyMember*> Party, string* Time)
 			break;
 	}
 	QuestOneIntro_One(discount, Party[0]);
-	bool bar = QuestOneIntro_Two(Time);
+	bool bar = QuestOneIntro_Two(*Time);
 	return Accepted;
 }
 	
 
 int main(void)
 {
-	string* Time = "evening";
+	string Time = "evening";
 	vector<PartyMember*> Party;
 	Party.push_back(InitialEncounter());
-	bool QuestOneAccepted = QuestOneIntro(Party, Time);
+	bool QuestOneAccepted = QuestOneIntro(Party, Time*);
 	return 0;
 }
