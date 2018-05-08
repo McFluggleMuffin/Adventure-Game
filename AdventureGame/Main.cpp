@@ -158,23 +158,12 @@ void QuestOneIntro_One(bool discount, PartyMember* Adventurer)
 			break;
 	}
 }
-void ProcessTime(string time)
+int ProcessTime(string time)
 {
-	switch (time)
-	{
-		case "Morning":
-			return 1;
-			break;
-		case "Noon":
-			return 2;
-			break;
-		case "Evening":
-			return 3;
-			break;
-		case "Midnight"
-			return 4;
-			break;
-	}
+	if (time == "Morning") {return 1;}
+	if (time == "Noon") {return 2;}
+	if (time == "Evening") {return 3;}
+	return 4;
 }
 void Sleep(string* Time, int Comfort)
 {
@@ -229,7 +218,7 @@ bool QuestOneIntro_Two(string* Time)
 	switch (Choice)	
 	{
 		case 1:
-			Sleep(Time);
+			Sleep(Time, 2);
 			break;
 		case 2:
 			QuestOneIntro_Bar();
@@ -280,12 +269,12 @@ bool QuestOneIntro(vector<PartyMember*> Party, string* Time)
 			}
 			break;
 		case 3:
-			cout << "Ok, well there is a cave full of spiders in the woods to the east, get rid of them and I'll pay you a king's randsom" << endl;
+			cout << "Ok, wContributorell there is a cave full of spiders in the woods to the east, get rid of them and I'll pay you a king's randsom" << endl;
 			break;
 	}
 	QuestOneIntro_One(discount, Party[0]);
 
-	bool bar = QuestOneIntro_Two(*Time);
+	bool bar = QuestOneIntro_Two(Time);
 	return Accepted;
 
 }
