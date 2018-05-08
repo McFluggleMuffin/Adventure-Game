@@ -269,7 +269,7 @@ bool QuestOneIntro(vector<PartyMember*> Party, string* Time)
 			}
 			break;
 		case 3:
-			cout << "Ok, wContributorell there is a cave full of spiders in the woods to the east, get rid of them and I'll pay you a king's randsom" << endl;
+			cout << "Ok, well there is a cave full of spiders in the woods to the east, get rid of them and I'll pay you a king's randsom" << endl;
 			break;
 	}
 	QuestOneIntro_One(discount, Party[0]);
