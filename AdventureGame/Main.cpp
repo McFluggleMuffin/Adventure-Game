@@ -94,6 +94,7 @@ Player* InitialEncounter(void)
 	cout << "Mind introducing yourself stranger? What's your name?" << endl;
 	string Name;
 	cin >> Name;	
+	LeaveSpace();
 	cout << "Well then " <<  Name   <<"  what are you known to be?" << endl;
 	for (string C : AllClasses)
 	{
@@ -101,6 +102,7 @@ Player* InitialEncounter(void)
 	}
 	int Choice;
 	cin >> Choice;
+	LeaveSpace();
 	do
 	{
 		if (Choice <= static_cast<int>(AllClasses.size()) && Choice >= 1)
@@ -117,40 +119,33 @@ Player* InitialEncounter(void)
 
 void QuestOneIntro_One(bool discount, Player* _player)
 {
-	string LowPrice;
-	string HighPrice;
-	vector<int> LowPricev;
-	vector<int> HighPricev;
 	if (discount)
 	{
-		LowPrice = "75 bronze";
-		HighPrice = "8 silver";		
-		LowPricev = {0, 0, 75};
-		HighPricev = {0, 8, 0};
-	}	
+		cout << "A room's gunna cost you 75 bronze pieces a night, or 8 silver for the nicer rooms at the top" << endl;		
+		cout << "1. Hand over the 75 bronze for a room" << endl;
+		cout << "2. Pay the 8 silver, it's been a long day on the road, you want the nicer bed" << endl;
+	}
 	else
 	{
-		LowPrice = "2 silver";
-		HighPrice = "10";
-		LowPricev = {0, 2, 0};
-		HighPricev = {0, 10, 0};
+		cout << "A room is 2 silver pieces a night, or 10 for the nicer rooms at the top" << endl;
+		cout << "1. Hand over 2 silver for a room" << endl;
+		cout << "Pay the 10, it's been a long day on the road, you want the nicer bed" << endl;
 	}
-	LeaveSpace();
-	cout << "A room is " + LowPrice + " pieces a night, or " + HighPrice + " for the nicer rooms at the top" << endl;
-	cout << "1. Hand over " + LowPrice + " for a room" << endl;
-	cout << "2. Pay the " + HighPrice + ", it's been a long day on the road, you want the nicer bed" << endl;
 	cout << "3. You don't need the room, you're just here for a drink" << endl;  
 	int Choice;
 	cin >> Choice;
+	LeaveSpace();
 	bool BarOrBed;
 	switch (Choice)
 	{
 		case 1:
-			_player->Pay(LowPrice[0], LowPrice[1], LowPrice[2]);
+			if (discount){_player->Pay(0, 0, 75);}
+			else {_player->Pay(0, 2, 0);}
 			cout << "Thanks, here's your key, you'll be in room 4" << endl;
 			break;
 		case 2:
-			_player->Pay(HighPrice[0], HighPrice[1], HighPrice[2]);
+			if (discount){_player->Pay(0, 8, 0);}
+			else {_player->Pay(0, 10, 0);}
 			cout << "Thanks, here's your key, you'll be in room 12" << endl;
 			break;
 		case 3:
@@ -168,11 +163,12 @@ int ProcessTime(string time)
 void Sleep(string* Time, int Comfort)
 {
 	//Morning >> Noon >> Evening >> Midnight >> Morning
-	cout << "It is currently " << Time << ", when would you like to sleep until?" << endl;
+	cout << "It is currently " << *Time << ", when would you like to sleep until?" << endl;
 	cout << "1. Midnight" << endl;
 	cout << "2. Morning" << endl;
 	int Choice;
 	cin >> Choice;
+	LeaveSpace();
 	switch (Choice)
 	{
 		case 1:
@@ -189,7 +185,6 @@ void Sleep(string* Time, int Comfort)
 }
 void QuestOneIntro_Bar(void)
 {
-	cout << "The bar is just through the door on your left enjoy." << endl;
 	cout << "You walk through the door to discover the bar is full of people." << endl;
 	cout << "They're very joyful enjoying their mead, however one fellow in the corner seems to be sad." << endl;
 	cout << "1. Approach the fellow" << endl;
@@ -197,6 +192,7 @@ void QuestOneIntro_Bar(void)
 	cout << "3. Leave the bar and speak the inn-keeper" << endl;
 	int Choice;
 	cin >> Choice;
+	LeaveSpace();
 	switch (Choice)
 	{
 		case 1:
@@ -209,12 +205,12 @@ void QuestOneIntro_Bar(void)
 }
 bool QuestOneIntro_Two(string* Time)
 {
-	LeaveSpace();
 	cout << "If you're looking for a drink, the bar is just around the corner there" << endl;
 	cout << "1. Head up to your room, you need the sleep" << endl;
 	cout << "2. A drink at the bar sounds good" << endl;
 	int Choice;
 	cin >> Choice;
+	LeaveSpace();
 	switch (Choice)	
 	{
 		case 1:
@@ -228,7 +224,6 @@ bool QuestOneIntro_Two(string* Time)
 bool QuestOneIntro(Player* _player, string* Time)
 {
 	bool Accepted = false;
-	LeaveSpace();
 	cout << "Nice to meet you, I'm Gregor Karlsson, innkeeper here at the Bearded Woman." << endl;
 	cout << "Say, an adventurer like yourself wouldn't be looking for a job would you, put a little cash in your pocket?" << endl;
 	cout << "1. Politely decline, you don't need the money anyway" << endl;
@@ -236,6 +231,7 @@ bool QuestOneIntro(Player* _player, string* Time)
 	cout << "3. You had me at money!" << endl;
 	int Choice_1;
 	cin >> Choice_1;
+	LeaveSpace();
 	int Choice_2;
 	bool discount = false;
 	switch (Choice_1)
@@ -256,6 +252,7 @@ bool QuestOneIntro(Player* _player, string* Time)
 			cout << "2. Of course, anything for a fellow citizen of the realm" << endl;
 			int Choice_3;
 			cin >> Choice_3;
+			LeaveSpace();
 			switch (Choice_3)
 			{
 				case 1:
@@ -273,7 +270,6 @@ bool QuestOneIntro(Player* _player, string* Time)
 			break;
 	}
 	QuestOneIntro_One(discount, _player);
-
 	bool bar = QuestOneIntro_Two(Time);
 	return Accepted;
 
