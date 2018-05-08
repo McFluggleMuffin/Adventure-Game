@@ -153,7 +153,27 @@ void QuestOneIntro_One(bool discount, PartyMember* Adventurer)
 			break;
 	}
 }
-bool QuestOneIntro_Two(void)
+void Sleep(string* Time)
+{
+	cout << "It is currently " + Time + ", when would you like to sleep until?" << endl;
+	cout << "1. Midnight" << endl;
+	cout << "2. Morning" << endl;
+	int Choice;
+	cin >> Choice;
+	switch (Choice)
+	{
+		case 1:
+			Time = "Midnight";
+			break;
+		case 2:
+			Time = "Morning";
+			break;
+		case default:
+			cout << "Please enter a valid choice" << endl;
+			break;
+	}
+}
+bool QuestOneIntro_Two(string* Time)
 {
 	LeaveSpace();
 	cout << "If you're looking for a drink, the bar is just around the corner there" << endl;
@@ -164,14 +184,14 @@ bool QuestOneIntro_Two(void)
 	switch (Choice)	
 	{
 		case 1:
-			return true;	
+		`	Sleep(Time);
 			break;
 		case 2:
 			return false;	
 			break;
 	}	
 }
-bool QuestOneIntro(vector<PartyMember*> Party)
+bool QuestOneIntro(vector<PartyMember*> Party, string* Time)
 {
 	bool Accepted = false;
 	LeaveSpace();
@@ -219,14 +239,16 @@ bool QuestOneIntro(vector<PartyMember*> Party)
 			break;
 	}
 	QuestOneIntro_One(discount, Party[0]);
+	bool bar = QuestOneIntro_Two(Time);
 	return Accepted;
 }
 	
 
 int main(void)
 {
+	string* Time = "evening";
 	vector<PartyMember*> Party;
 	Party.push_back(InitialEncounter());
-	bool QuestOneAccepted = QuestOneIntro(Party);
+	bool QuestOneAccepted = QuestOneIntro(Party, Time);
 	return 0;
 }
