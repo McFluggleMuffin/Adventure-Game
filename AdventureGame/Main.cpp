@@ -192,7 +192,7 @@ void QuestOneIntro_Bar(void)
 	cout << "The bar is just through the door on your left enjoy." << endl;
 	cout << "You walk through the door to discover the bar is full of people." << endl;
 	cout << "They're very joyful enjoying their mead, however one fellow in the corner seems to be sad." << endl;
-	cout << "1. Approach the felow" << endl;
+	cout << "1. Approach the fellow" << endl;
 	cout << "2. Get some mead (costs 10 bronze)" << endl;
 	cout << "3. Leave the bar and speak the inn-keeper" << endl;
 	int Choice;
