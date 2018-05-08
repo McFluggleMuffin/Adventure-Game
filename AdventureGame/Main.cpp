@@ -89,7 +89,7 @@ PartyMember* InitialEncounter(void)
 	cout << "Mind introducing yourself stranger? What's your name?" << endl;
 	string Name;
 	cin >> Name;	
-	cout << "Well then " + Name + ", what are you known to be?" << endl;
+	cout << "Well then " <<  Name   <<"  what are you known to be?" << endl;
 	for (string C : AllClasses)
 	{
 		cout << C << endl;
@@ -155,7 +155,7 @@ void QuestOneIntro_One(bool discount, PartyMember* Adventurer)
 }
 void Sleep(string* Time)
 {
-	cout << "It is currently " + Time + ", when would you like to sleep until?" << endl;
+	cout << "It is currently " << Time << ", when would you like to sleep until?" << endl;
 	cout << "1. Midnight" << endl;
 	cout << "2. Morning" << endl;
 	int Choice;
@@ -247,8 +247,9 @@ bool QuestOneIntro(vector<PartyMember*> Party, string* Time)
 int main(void)
 {
 	string Time = "evening";
+	string* pTime = &Time;
 	vector<PartyMember*> Party;
 	Party.push_back(InitialEncounter());
-	bool QuestOneAccepted = QuestOneIntro(Party, Time*);
+	bool QuestOneAccepted = QuestOneIntro(Party, pTime );
 	return 0;
 }
