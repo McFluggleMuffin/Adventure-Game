@@ -129,13 +129,12 @@ void QuestOneIntro_One(bool discount, Player* _player)
 	{
 		cout << "A room is 2 silver pieces a night, or 10 for the nicer rooms at the top" << endl;
 		cout << "1. Hand over 2 silver for a room" << endl;
-		cout << "Pay the 10, it's been a long day on the road, you want the nicer bed" << endl;
+		cout << "2. Pay the 10, it's been a long day on the road, you want the nicer bed" << endl;
 	}
 	cout << "3. You don't need the room, you're just here for a drink" << endl;  
 	int Choice;
 	cin >> Choice;
 	LeaveSpace();
-	bool BarOrBed;
 	switch (Choice)
 	{
 		case 1:
@@ -203,7 +202,7 @@ void QuestOneIntro_Bar(void)
 			break;
 	}
 }
-bool QuestOneIntro_Two(string* Time)
+void QuestOneIntro_Two(string* Time)
 {
 	cout << "If you're looking for a drink, the bar is just around the corner there" << endl;
 	cout << "1. Head up to your room, you need the sleep" << endl;
@@ -239,6 +238,7 @@ bool QuestOneIntro(Player* _player, string* Time)
 		
 		case 1:
 			cout << "Aww well" << endl;
+			Accepted = false;
 			break;
 		case 2:
 			cout << "A smart one you are, well, I'll tell you more then" << endl;
@@ -250,10 +250,9 @@ bool QuestOneIntro(Player* _player, string* Time)
 			cout << "I can't leave here, but I recon a person of your strengths should be able to handle it, how does it sound?" << endl;	
 			cout << "1. And the reward?" << endl;
 			cout << "2. Of course, anything for a fellow citizen of the realm" << endl;
-			int Choice_3;
-			cin >> Choice_3;
+			cin >> Choice_2;
 			LeaveSpace();
-			switch (Choice_3)
+			switch (Choice_2)
 			{
 				case 1:
 					cout << "Clear out the cave, and I'll give you 20 gold pieces" << endl;
@@ -267,10 +266,11 @@ bool QuestOneIntro(Player* _player, string* Time)
 			break;
 		case 3:
 			cout << "Ok, well there is a cave full of spiders in the woods to the east, get rid of them and I'll pay you a king's randsom" << endl;
+			Accepted = true;
 			break;
 	}
 	QuestOneIntro_One(discount, _player);
-	bool bar = QuestOneIntro_Two(Time);
+	QuestOneIntro_Two(Time);
 	return Accepted;
 
 }
@@ -282,5 +282,6 @@ int main(void)
 	string* pTime = &Time;
 	Player* _player = InitialEncounter();
 	bool QuestOneAccepted = QuestOneIntro(_player, pTime );
+	cout << QuestOneAccepted << endl;
 	return 0;
 }
