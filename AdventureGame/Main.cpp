@@ -18,11 +18,11 @@ class Wallet
 		Wallet(void) : Gold(10), Silver(50), Bronze(250) {}	
 };
 
-class PartyMember
+class Player 
 {
 	public:
-		PartyMember(int S, int A, int I, string N) : Name(N), Strength(S), Agility(A), Intelect(I), Health(S * 2), Stamina(A * 2), Magika(I * 2) {}
-		static PartyMember* make_member(int Choice, string N);
+		Player(int S, int A, int I, string N) : Name(N), Strength(S), Agility(A), Intelect(I), Health(S * 2), Stamina(A * 2), Magika(I * 2) {}
+		static Player* make_player(int Choice, string N);
 		virtual void Shout(void) = 0;
 		bool StrengthTest(int Pass){return Pass <= Strength;}
 		bool AgilityTest(int Pass){return Pass <= Agility;}
@@ -49,10 +49,10 @@ class PartyMember
 		int Magika;
 };
 
-class Warrior : public PartyMember
+class Warrior : public Player
 {
 	public:
-		Warrior(string N) : PartyMember(10,5,0,N) {}
+		Warrior(string N) : Player(10,5,0,N) {}
 		void Shout(void);
 };
 void Warrior::Shout(void)
@@ -60,10 +60,10 @@ void Warrior::Shout(void)
 	cout << "I am a mighty warrior" << endl;
 }
 
-class Mage : public PartyMember
+class Mage : public Player
 {
 	public:
-		Mage(string N) : PartyMember(0,5,10,N) {}
+		Mage(string N) : Player(0,5,10,N) {}
 		void Shout(void);
 };
 void Mage::Shout(void)
@@ -71,7 +71,7 @@ void Mage::Shout(void)
 	cout << "I am a wizard" << endl;
 }
 
-PartyMember* PartyMember::make_member(int Choice, string N)
+Player* Player::make_player(int Choice, string N)
 {
 	switch (Choice)
 	{
@@ -85,7 +85,7 @@ PartyMember* PartyMember::make_member(int Choice, string N)
 	return NULL;
 }
 
-PartyMember* InitialEncounter(void)
+Player* InitialEncounter(void)
 {
 	
 	vector<string> AllClasses = {"1. Warrior", "2. Mage"};
@@ -105,7 +105,7 @@ PartyMember* InitialEncounter(void)
 	{
 		if (Choice <= static_cast<int>(AllClasses.size()) && Choice >= 1)
 		{
-			return PartyMember::make_member(Choice, Name);
+			return Player::make_player(Choice, Name);
 		}
 		else 
 		{
@@ -115,7 +115,7 @@ PartyMember* InitialEncounter(void)
 	while(true);
 }
 
-void QuestOneIntro_One(bool discount, PartyMember* Adventurer)
+void QuestOneIntro_One(bool discount, Player* _player)
 {
 	string LowPrice;
 	string HighPrice;
@@ -146,11 +146,11 @@ void QuestOneIntro_One(bool discount, PartyMember* Adventurer)
 	switch (Choice)
 	{
 		case 1:
-			Adventurer->Pay(LowPrice[0], LowPrice[1], LowPrice[2]);
+			_player->Pay(LowPrice[0], LowPrice[1], LowPrice[2]);
 			cout << "Thanks, here's your key, you'll be in room 4" << endl;
 			break;
 		case 2:
-			Adventurer->Pay(HighPrice[0], HighPrice[1], HighPrice[2]);
+			_player->Pay(HighPrice[0], HighPrice[1], HighPrice[2]);
 			cout << "Thanks, here's your key, you'll be in room 12" << endl;
 			break;
 		case 3:
@@ -225,7 +225,7 @@ bool QuestOneIntro_Two(string* Time)
 			break;
 	}	
 }
-bool QuestOneIntro(vector<PartyMember*> Party, string* Time)
+bool QuestOneIntro(Player* _player, string* Time)
 {
 	bool Accepted = false;
 	LeaveSpace();
@@ -272,7 +272,7 @@ bool QuestOneIntro(vector<PartyMember*> Party, string* Time)
 			cout << "Ok, well there is a cave full of spiders in the woods to the east, get rid of them and I'll pay you a king's randsom" << endl;
 			break;
 	}
-	QuestOneIntro_One(discount, Party[0]);
+	QuestOneIntro_One(discount, _player);
 
 	bool bar = QuestOneIntro_Two(Time);
 	return Accepted;
@@ -284,8 +284,7 @@ int main(void)
 {
 	string Time = "evening";
 	string* pTime = &Time;
-	vector<PartyMember*> Party;
-	Party.push_back(InitialEncounter());
-	bool QuestOneAccepted = QuestOneIntro(Party, pTime );
+	Player* _player = InitialEncounter();
+	bool QuestOneAccepted = QuestOneIntro(_player, pTime );
 	return 0;
 }
