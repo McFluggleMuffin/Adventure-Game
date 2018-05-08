@@ -105,19 +105,25 @@ PartyMember* InitialEncounter(void)
 	while(true);
 }
 
-int QuestOneIntro_One(bool discount)
+void QuestOneIntro_One(bool discount, PartyMember* Adventurer)
 {
 	string LowPrice;
 	string HighPrice;
+	vector<int> LowPricev;
+	vector<int> HighPricev;
 	if (discount)
 	{
 		LowPrice = "75 bronze";
 		HighPrice = "8 silver";		
+		LowPricev = {0, 0, 75};
+		HighPricev = {0, 8, 0};
 	}	
 	else
 	{
 		LowPrice = "2 silver";
 		HighPrice = "10";
+		LowPricev = {0, 2, 0};
+		HighPricev = {0, 10, 0};
 	}
 	cout << "A room is " + LowPrice + " pieces a night, or " + HighPrice + " for the nicer rooms at the top" << endl;
 	cout << "1. Hand over " + LowPrice + " for a room" << endl;
@@ -125,7 +131,21 @@ int QuestOneIntro_One(bool discount)
 	cout << "3. You don't need the room, you're just here for a drink" << endl;  
 	int Choice;
 	cin >> Choice;
-	return Choice;
+	bool BarOrBed;
+	switch (Choice)
+	{
+		case 1:
+			Adventurer->Pay(LowPrice[0], LowPrice[1], LowPrice[2]);
+			cout << "Thanks, here's your key, you'll be in room 4" << endl;
+			break;
+		case 2:
+			Adventurer->Pay(HighPrice[0], HighPrice[1], HighPrice[2]);
+			cout << "Thanks, here's your key, you'll be in room 12" << endl;
+			break;
+		case 3:
+			cout << "I see, well the bar is just around the corner, come back if you want to stay the night" << endl;
+			break;
+	}
 }
 bool QuestOneIntro_Two(void)
 {
@@ -142,7 +162,7 @@ bool QuestOneIntro_Two(void)
 		case 2:
 			return false;	
 			break;
-	}
+	}	
 }
 bool QuestOneIntro(vector<PartyMember*> Party)
 {
@@ -190,34 +210,7 @@ bool QuestOneIntro(vector<PartyMember*> Party)
 			cout << "Ok, well there is a cave full of spiders in the woods to the east, get rid of them and I'll pay you a king's randsom" << endl;
 			break;
 	}
-	Choice_2 = QuestOneIntro_One(discount);
-	vector<int> LowPrice;
-	vector<int> HighPrice;
-	if (discount)
-	{
-		LowPrice = {0, 0, 75};
-		HighPrice = {0, 8, 0};
-	}
-	else
-	{
-		LowPrice = {0, 2, 0};
-		HighPrice = {0, 10, 0};
-	}		
-	bool BarOrBed;
-	switch (Choice_2)
-	{
-		case 1:
-			Party[0]->Pay(LowPrice[0], LowPrice[1], LowPrice[2]);
-			cout << "Thanks, here's your key, you'll be in room 4" << endl;
-			break;
-		case 2:
-			Party[0]->Pay(HighPrice[0], HighPrice[1], HighPrice[2]);
-			cout << "Thanks, here's your key, you'll be in room 12" << endl;
-			break;
-		case 3:
-			cout << "I see, well the bar is just around the corner, come back if you want to stay the night" << endl;
-			break;
-	}
+	QuestOneIntro_One(discount, Party[0]);
 	return Accepted;
 }
 	
