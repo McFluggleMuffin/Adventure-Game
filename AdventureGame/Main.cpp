@@ -158,23 +158,12 @@ void QuestOneIntro_One(bool discount, PartyMember* Adventurer)
 			break;
 	}
 }
-void ProcessTime(string time)
+int ProcessTime(string time)
 {
-	switch (time)
-	{
-		case "Morning":
-			return 1;
-			break;
-		case "Noon":
-			return 2;
-			break;
-		case "Evening":
-			return 3;
-			break;
-		case "Midnight"
-			return 4;
-			break;
-	}
+	if (time == "Morning") {return 1;}
+	if (time == "Noon") {return 2;}
+	if (time == "Evening") {return 3;}
+	return 4;
 }
 void Sleep(string* Time, int Comfort)
 {
@@ -209,7 +198,7 @@ bool QuestOneIntro_Two(string* Time)
 	switch (Choice)	
 	{
 		case 1:
-			Sleep(Time);
+			Sleep(Time, 2);
 			break;
 		case 2:
 			return false;	
@@ -264,7 +253,7 @@ bool QuestOneIntro(vector<PartyMember*> Party, string* Time)
 			break;
 	}
 	QuestOneIntro_One(discount, Party[0]);
-	bool bar = QuestOneIntro_Two(*Time);
+	bool bar = QuestOneIntro_Two(Time);
 	return Accepted;
 }
 	
