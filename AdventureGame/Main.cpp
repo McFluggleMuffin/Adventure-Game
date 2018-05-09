@@ -3,7 +3,11 @@
 #include<vector>
 #include<fstream>
 
+#include "Main.hpp"
 #include "nlohmann/json.hpp"
+const std::string JsonStoryTag::narrative = "narrative";
+const std::string JsonStoryTag::branches = "branches";
+const std::string JsonStoryTag::options = "options";
 
 using namespace std;
 
@@ -71,12 +75,12 @@ Player* Player::make_player(int Choice, string N)
 
 void StoryBranch(string _branch, json _j)
 {
-	vector<string> NARRATIVE = _j[_branch]["narrative"].get<std::vector<string>>();
+	vector<string> NARRATIVE = _j[_branch][JsonStoryTag::narrative].get<std::vector<string>>();
 	for (auto child : NARRATIVE)
 	{
 		cout << child << endl;
 	}
-	vector<string> OPTIONS = _j[_branch]["options"].get<std::vector<string>>();
+	vector<string> OPTIONS = _j[_branch][JsonStoryTag::options].get<std::vector<string>>();
 	for (auto child : OPTIONS)
 	{
 		cout << child << endl;
@@ -84,12 +88,12 @@ void StoryBranch(string _branch, json _j)
 	int Choice;
 	cin >> Choice;
 	LeaveSpace();
-	StoryBranch(_j[_branch]["branches"][Choice - 1], _j);
+	StoryBranch(_j[_branch][JsonStoryTag::branches][Choice - 1], _j);
 }
 
 void Entry(void)
 {
-	cout << "Hi, welcome, what name" << endl;
+	cout << "Hi, welcome, what is your name" << endl;
 	string name;
 	cin >> name;
 }
