@@ -81,7 +81,7 @@ void StoryBranch(string _branch, json _j)
 		cout << child << endl;
 	}
 	vector<string> OPTIONS = _j[_branch][JsonStoryTag::options].get<std::vector<string>>();
-	if (OPTIONS.size = 0)
+	if (OPTIONS.size() == 0)
 	{
 		for (auto child : OPTIONS)
 		{
