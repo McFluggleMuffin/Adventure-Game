@@ -26,7 +26,7 @@
 		"options":["1. Sure thing, anything for another citizen of the realm", "2. And the reward?"],
 		"branches":["questone_accepted", "questone_reward"]
 	},
-	"questone_declined":[
-		"narrative":["Aww well, fair enough", "If you're looking to stay the night, I can get you a room, otherwise the bar is just around the corner"]
-	]
+	"questone_declined":{
+		"narrative":["Aw well, fair enough", "If you're looking to stay the night, I can get you a room, otherwise the bar is just around the corner"]
+	}
 }

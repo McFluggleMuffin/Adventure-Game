@@ -69,32 +69,21 @@ Player* Player::make_player(int Choice, string N)
 	return NULL;
 }
 
-class Branch
-{
-	public:
-		vector<string> dialogue;
-		vector<Branch*> branches;
-		Branch(vector<string> _dialogue) : dialogue(_dialogue) {}
-	private:
-};
-
-void ParseDialogue(json _j, vector<string>* _dialogue)
-{
-	for (auto it = _j.begin(); it != _j.end(); ++it)
-	{
-    		std::cout << it.key() << " | " << it.value()["dialogue"] << "\n";
-	}
-}
-void ParseBranches(json _j, vector<Branch*> _branches)
-{
-
-
-}
 void StoryBranch(string _branch, json _j)
 {
-	cout << _j[_branch]["dialogue"][0].get<std::string>() << endl;
+	vector<string> NARRATIVE = _j[_branch]["narrative"].get<std::vector<string>>();
+	for (auto child : NARRATIVE)
+	{
+		cout << child << endl;
+	}
+	vector<string> OPTIONS = _j[_branch]["options"].get<std::vector<string>>();
+	for (auto child : OPTIONS)
+	{
+		cout << child << endl;
+	}
 	int Choice;
 	cin >> Choice;
+	LeaveSpace();
 	StoryBranch(_j[_branch]["branches"][Choice - 1], _j);
 }
 
@@ -117,9 +106,7 @@ int main(void)
 	Infile >> Branches;
 	Infile.close();	
 	vector<string> temp;	
-	vector<string>* ptemp;
-	ptemp = &temp;
+	LeaveSpace();
 	StoryBranch("entrypoint", Branches);
-	Entry();
 	return 0;
 }
