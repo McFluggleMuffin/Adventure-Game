@@ -257,6 +257,19 @@ bool QuestOneIntro(Player* _player, string* Time)
 			{
 				case 1:
 					cout << "Clear out the cave, and I'll give you 20 gold pieces" << endl;
+					cout << "You up for that?" << endl;
+					cout << "1. Agree to clear out the cave" << endl;
+					cout << "2. Give it a pass, it's not worth the gold" << endl;
+					int Choice_3;
+					cin >> Choice_3;
+					LeaveSpace();
+					switch (Choice_3)
+					{
+						case 1:
+							Accepted = true;
+						case 2:
+							Accepted = false;
+					}
 					break;
 				case 2:
 					cout << "I knew you'd say that! Seeing as you're so nice, I'll give you a little discount on your stay" << endl;
