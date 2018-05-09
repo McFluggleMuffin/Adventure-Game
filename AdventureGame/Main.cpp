@@ -1,11 +1,13 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include<fstream>
 
 #include "nlohmann/json.hpp"
 
 using namespace std;
 
+using json = nlohmann::json;
 void LeaveSpace(void)
 {
 	cout << string(50, '\n');
@@ -287,6 +289,17 @@ int main(void)
 	string Time = "evening";
 	string* pTime = &Time;
 	vector<PartyMember*> Party;
+	string UnserializedJSON;	
+	json Branches;
+
+	ifstream Infile;
+	Infile.open("dialogue_EN.json");
+	cout << "Loading" << endl;
+	Infile >> Branches;
+	Infile.close();	
+
+	cout << Branches.dump() << endl;
+
 	Party.push_back(InitialEncounter());
 	bool QuestOneAccepted = QuestOneIntro(Party, pTime );
 	
