@@ -113,6 +113,7 @@ Player* QuestOne_EnterDetails(void)
 			return Player::make_player(Choice, Name);
 		}
 		else 
+
 		{
 			cout << "Please enter a valid response" << endl;
 		}
