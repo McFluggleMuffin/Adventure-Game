@@ -1,9 +1,13 @@
 #include<iostream>
 #include<string>
 #include<vector>
+#include<fstream>
+
+#include "nlohmann/json.hpp"
 
 using namespace std;
 
+using json = nlohmann::json;
 void LeaveSpace(void)
 {
 	cout << string(50, '\n');
@@ -84,9 +88,7 @@ Player* Player::make_player(int Choice, string N)
 	}
 	return NULL;
 }
-void QuestOne_Accepted(){}
-void QuestOne_Decline(){}
-void QuestOne_MoreDetails(){}
+
 Player* QuestOne_EnterDetails(void)
 {
 	vector<string> AllClasses = {"1. Warrior", "2. Mage"};
@@ -117,27 +119,27 @@ Player* QuestOne_EnterDetails(void)
 	}
 	while(true);
 }
-int QuestOne_JobOffer(void)
+
+class Branch
 {
-	cout << "Nice to meet you, I'm Gregor Karlsson, innkeeper here at the Bearded Woman." << endl;
-	cout << "Say, an adventurer like yourself wouldn't be looking for a job would you, put a little cash in your pocket?" << endl;
-	cout << "1. Politely decline, you don't need the money anyway" << endl;
-	cout << "2. Ask for more details, you can't agree without them" << endl;
-	cout << "3. You had me at money!" << endl;
+	public:
+		vector<string> dialogue;
+		vector<Branch*> branches;
+		virtual void Action(void);
+	private:
+};
+void StoryBranch(Branch* _branch)
+{
+	for(string &text:_branch->dialogue)
+	{
+		cout << text << endl;
+	}
 	int Choice;
 	cin >> Choice;
-	switch (Choice)
-	{
-		case 1:
-			QuestOne_Decline();
-		case 2:
-			QuestOne_MoreDetails();
-		case 3:
-			QuestOne_Accepted();
-	}
+	StoryBranch(_branch->branches[Choice - 1]);
 }
+void QuestOneIntro_One(bool discount, PartyMember* Adventurer)
 
-int QuestOneIntro_One(bool discount, Player* _player)
 {
 	if (discount)
 	{
@@ -313,8 +315,21 @@ int main(void)
 {
 	string Time = "evening";
 	string* pTime = &Time;
-	Player* _player = QuestOne_EnterDetails();
-	bool QuestOneAccepted = QuestOneIntro(_player, pTime );
-	cout << QuestOneAccepted << endl;
+
+	vector<PartyMember*> Party;
+	string UnserializedJSON;	
+	json Branches;
+
+	ifstream Infile;
+	Infile.open("dialogue_EN.json");
+	cout << "Loading" << endl;
+	Infile >> Branches;
+	Infile.close();	
+
+	cout << Branches.dump() << endl;
+
+	Party.push_back(InitialEncounter());
+	bool QuestOneAccepted = QuestOneIntro(Party, pTime );
+
 	return 0;
 }

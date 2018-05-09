@@ -1,0 +1,12 @@
+{
+	"intro":{
+		"dialogue":{
+			"1":"How are you?",
+			"2":"I hate you!"
+		},
+		"branches":{
+			"1":"Im great thanks!",
+			"2":"Well screw you too!"
+		}
+	}
+}
