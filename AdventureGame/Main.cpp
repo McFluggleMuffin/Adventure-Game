@@ -8,6 +8,7 @@
 using namespace std;
 
 using json = nlohmann::json;
+
 void LeaveSpace(void)
 {
 	cout << string(50, '\n');
@@ -27,7 +28,6 @@ class Player
 	public:
 		Player(int S, int A, int I, string N) : Name(N), Strength(S), Agility(A), Intelect(I){}
 		static Player* make_player(int Choice, string N);
-		virtual void Shout(void) = 0;
 		bool StrengthTest(int Pass){return Pass <= Strength;}
 		bool AgilityTest(int Pass){return Pass <= Agility;}
 		bool IntelectTest(int Pass){return Pass <= Intelect;}
@@ -48,13 +48,11 @@ class Warrior : public Player
 {
 	public:
 		Warrior(string N) : Player(10,5,0,N) {}
-		void Shout(void);
 };
 class Mage : public Player
 {
 	public:
 		Mage(string N) : Player(0,5,10,N) {}
-		void Shout(void);
 };
 
 Player* Player::make_player(int Choice, string N)
@@ -76,18 +74,28 @@ class Branch
 	public:
 		vector<string> dialogue;
 		vector<Branch*> branches;
-		virtual void Action(void);
+		Branch(vector<string> _dialogue) : dialogue(_dialogue) {}
 	private:
 };
-void StoryBranch(Branch* _branch)
+
+void ParseDialogue(json _j, vector<string>* _dialogue)
 {
-	for(string &text:_branch->dialogue)
+	for (auto it = _j.begin(); it != _j.end(); ++it)
 	{
-		cout << text << endl;
+    		std::cout << it.key() << " | " << it.value()["dialogue"] << "\n";
 	}
+}
+void ParseBranches(json _j, vector<Branch*> _branches)
+{
+
+
+}
+void StoryBranch(string _branch, json _j)
+{
+	cout << _j[_branch]["dialogue"][0].get<std::string>() << endl;
 	int Choice;
 	cin >> Choice;
-	StoryBranch(_branch->branches[Choice - 1]);
+	StoryBranch(_j[_branch]["branches"][Choice - 1], _j);
 }
 
 void Entry(void)
@@ -108,8 +116,10 @@ int main(void)
 	cout << "Loading" << endl;
 	Infile >> Branches;
 	Infile.close();	
-
-	cout << Branches.dump() << endl;
+	vector<string> temp;	
+	vector<string>* ptemp;
+	ptemp = &temp;
+	StoryBranch("entrypoint", Branches);
 	Entry();
 	return 0;
 }
