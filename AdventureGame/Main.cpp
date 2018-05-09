@@ -81,14 +81,21 @@ void StoryBranch(string _branch, json _j)
 		cout << child << endl;
 	}
 	vector<string> OPTIONS = _j[_branch][JsonStoryTag::options].get<std::vector<string>>();
-	for (auto child : OPTIONS)
+	if (OPTIONS.size = 0)
 	{
-		cout << child << endl;
+		for (auto child : OPTIONS)
+		{
+			cout << child << endl;
+		}
+		int Choice;
+		cin >> Choice;
+		LeaveSpace();
+		StoryBranch(_j[_branch][JsonStoryTag::branches][Choice - 1], _j);
 	}
-	int Choice;
-	cin >> Choice;
-	LeaveSpace();
-	StoryBranch(_j[_branch][JsonStoryTag::branches][Choice - 1], _j);
+	else
+	{
+		StoryBranch(_j[_branch][JsonStoryTag::branches][0], _j);
+	}
 }
 
 void Entry(void)
