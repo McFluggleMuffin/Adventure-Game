@@ -2,6 +2,8 @@
 #include<string>
 #include<vector>
 
+#include "nlohmann/json.hpp"
+
 using namespace std;
 
 void LeaveSpace(void)
@@ -109,7 +111,24 @@ PartyMember* InitialEncounter(void)
 	}
 	while(true);
 }
-
+class Branch
+{
+	public:
+		vector<string> dialogue;
+		vector<Branch*> branches;
+		virtual void Action(void);
+	private:
+};
+void StoryBranch(Branch* _branch)
+{
+	for(string &text:_branch->dialogue)
+	{
+		cout << text << endl;
+	}
+	int Choice;
+	cin >> Choice;
+	StoryBranch(_branch->branches[Choice - 1]);
+}
 void QuestOneIntro_One(bool discount, PartyMember* Adventurer)
 {
 	string LowPrice;
