@@ -84,10 +84,11 @@ Player* Player::make_player(int Choice, string N)
 	}
 	return NULL;
 }
-
-Player* InitialEncounter(void)
+void QuestOne_Accepted(){}
+void QuestOne_Decline(){}
+void QuestOne_MoreDetails(){}
+Player* QuestOne_EnterDetails(void)
 {
-	
 	vector<string> AllClasses = {"1. Warrior", "2. Mage"};
 	LeaveSpace();	
 	cout << "Hello, welcome to the Bearded Woman, the best tavern in the land!" << endl;
@@ -115,6 +116,25 @@ Player* InitialEncounter(void)
 		}
 	}
 	while(true);
+}
+int QuestOne_JobOffer(void)
+{
+	cout << "Nice to meet you, I'm Gregor Karlsson, innkeeper here at the Bearded Woman." << endl;
+	cout << "Say, an adventurer like yourself wouldn't be looking for a job would you, put a little cash in your pocket?" << endl;
+	cout << "1. Politely decline, you don't need the money anyway" << endl;
+	cout << "2. Ask for more details, you can't agree without them" << endl;
+	cout << "3. You had me at money!" << endl;
+	int Choice;
+	cin >> Choice;
+	switch (Choice)
+	{
+		case 1:
+			QuestOne_Decline();
+		case 2:
+			QuestOne_MoreDetails();
+		case 3:
+			QuestOne_Accepted();
+	}
 }
 
 int QuestOneIntro_One(bool discount, Player* _player)
@@ -288,13 +308,12 @@ bool QuestOneIntro(Player* _player, string* Time)
 	return Accepted;
 
 }
-	
 
 int main(void)
 {
 	string Time = "evening";
 	string* pTime = &Time;
-	Player* _player = InitialEncounter();
+	Player* _player = QuestOne_EnterDetails();
 	bool QuestOneAccepted = QuestOneIntro(_player, pTime );
 	cout << QuestOneAccepted << endl;
 	return 0;
