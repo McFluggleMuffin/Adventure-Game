@@ -37,6 +37,11 @@ class PartyMember
 			wallet.Silver -= S;
 			wallet.Bronze -= B;
 		}
+		void Regen(int HealthGain)
+		{
+			Health = Health + HealthGain;
+			if (Health > Strength * 2){Health = Strength * 2;}
+		}
 		Wallet wallet;
 	private:
 		string Name;
@@ -174,8 +179,16 @@ void QuestOneIntro_One(bool discount, PartyMember* Adventurer)
 			break;
 	}
 }
-void Sleep(string* Time)
+int ProcessTime(string time)
 {
+	if (time == "Morning") {return 1;}
+	if (time == "Noon") {return 2;}
+	if (time == "Evening") {return 3;}
+	return 4;
+}
+void Sleep(string* Time, int Comfort)
+{
+	//Morning >> Noon >> Evening >> Midnight >> Morning
 	cout << "It is currently " << Time << ", when would you like to sleep until?" << endl;
 	cout << "1. Midnight" << endl;
 	cout << "2. Morning" << endl;
@@ -187,6 +200,7 @@ void Sleep(string* Time)
 			*Time = "Midnight";
 			break;
 		case 2:
+			
 			*Time = "Morning";
 			break;
 		default:
@@ -199,7 +213,7 @@ void QuestOneIntro_Bar(void)
 	cout << "The bar is just through the door on your left enjoy." << endl;
 	cout << "You walk through the door to discover the bar is full of people." << endl;
 	cout << "They're very joyful enjoying their mead, however one fellow in the corner seems to be sad." << endl;
-	cout << "1. Approach the felow" << endl;
+	cout << "1. Approach the fellow" << endl;
 	cout << "2. Get some mead (costs 10 bronze)" << endl;
 	cout << "3. Leave the bar and speak the inn-keeper" << endl;
 	int Choice;
@@ -225,7 +239,7 @@ bool QuestOneIntro_Two(string* Time)
 	switch (Choice)	
 	{
 		case 1:
-			Sleep(Time);
+			Sleep(Time, 2);
 			break;
 		case 2:
 			QuestOneIntro_Bar();
@@ -280,7 +294,10 @@ bool QuestOneIntro(vector<PartyMember*> Party, string* Time)
 			break;
 	}
 	QuestOneIntro_One(discount, Party[0]);
+
 	bool bar = QuestOneIntro_Two(Time);
+	return Accepted;
+
 }
 	
 
@@ -302,6 +319,5 @@ int main(void)
 
 	Party.push_back(InitialEncounter());
 	bool QuestOneAccepted = QuestOneIntro(Party, pTime );
-	
 	return 0;
 }
