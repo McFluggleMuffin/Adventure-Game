@@ -138,7 +138,7 @@ void StoryBranch(Branch* _branch)
 	cin >> Choice;
 	StoryBranch(_branch->branches[Choice - 1]);
 }
-void QuestOneIntro_One(bool discount, PartyMember* Adventurer)
+int QuestOneIntro_One(bool discount, Player* _player)
 
 {
 	if (discount)
@@ -316,7 +316,7 @@ int main(void)
 	string Time = "evening";
 	string* pTime = &Time;
 
-	vector<PartyMember*> Party;
+	Player* _player;
 	string UnserializedJSON;	
 	json Branches;
 
@@ -328,8 +328,8 @@ int main(void)
 
 	cout << Branches.dump() << endl;
 
-	Party.push_back(InitialEncounter());
-	bool QuestOneAccepted = QuestOneIntro(Party, pTime );
+	_player = QuestOne_EnterDetails();
+	bool QuestOneAccepted = QuestOneIntro(_player, pTime );
 
 	return 0;
 }
