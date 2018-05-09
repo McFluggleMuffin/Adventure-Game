@@ -112,7 +112,8 @@ Player* QuestOne_EnterDetails(void)
 		{
 			return Player::make_player(Choice, Name);
 		}
-		else 
+		else    157 May  9 10:26 dialogue_EN.json
+
 		{
 			cout << "Please enter a valid response" << endl;
 		}

@@ -1,12 +1,12 @@
 {
-	"intro":{
-		"dialogue":{
-			"1":"How are you?",
-			"2":"I hate you!"
-		},
-		"branches":{
-			"1":"Im great thanks!",
-			"2":"Well screw you too!"
-		}
+	"entrypoint":{
+		"narrative":["First line of narrative", "second line of narrative"], 
+		"dialogue":["Some text", "more text"],
+		"branches":["quest_one","sleep_one"]
+	},
+	"quest_one":{
+		"narrative":["First line of narrative", "second line of narrative"], 
+		"dialogue":["Some text", "more text"],
+		"branches":["quest_one","sleep_one"]
 	}
 }
