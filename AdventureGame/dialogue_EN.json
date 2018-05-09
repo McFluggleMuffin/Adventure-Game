@@ -5,8 +5,8 @@
 		"branches":["quest_one","sleep_one"]
 	},
 	"quest_one":{
-		"narrative":["First line of narrative", "second line of narrative"], 
-		"dialogue":["Some text", "more text"],
+		"narrative":["", "second line of narrative"], 
+		"dialogue":["NEW BRANCH", "more text"],
 		"branches":["quest_one","sleep_one"]
 	}
 }
