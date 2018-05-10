@@ -8,6 +8,7 @@
 const std::string JsonStoryTag::narrative = "narrative";
 const std::string JsonStoryTag::branches = "branches";
 const std::string JsonStoryTag::options = "options";
+const std::string JsonStoryTag::functions = "functions";
 
 using namespace std;
 
@@ -79,6 +80,11 @@ void StoryBranch(string _branch, json _j)
 	for (auto child : NARRATIVE)
 	{
 		cout << child << endl;
+	}
+	vector<string> FUNCTIONS = _j[_branch][JsonStoryTag::functions].get<std::vector<string>>();
+	for (auto child : FUNCTIONS)
+	{
+		//TODO run functions based on strings in FUNCTIONS
 	}
 	vector<string> OPTIONS = _j[_branch][JsonStoryTag::options].get<std::vector<string>>();
 	if (OPTIONS.size() == 0)

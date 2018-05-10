@@ -5,17 +5,20 @@
 		"options":["1. Polietly decline, you've had a long day and can't bear to make it longer",
 				 "2. Ask for more Details, you can't accept without them.",
 				 "3. You had me at money!"],
+		"functions":[],
 		"branches":["questone_declined","questone_moredetails", "questone_hadmeatmoney"]
 	},
 	"questone_hadmeatmoney":{
 		"narrative":["Ah, good, there's a spider nest down by the river to the east, some huge spiders live there",
 				"Go and clear the cave out, and I'll reward you handsomely"],
 		"options":[],
+		"functions":[],	
 		"branches":["questone_accepted"]
 	},
 	"questone_accepted":{
 		"narrative":["Tell you what, I'll let you stay cheaper tonight, as a sort of pre-payment if you will"],
 		"options":[],
+		"functions":[],
 		"branches":[]
 	},
 	"questone_moredetails":{
@@ -24,6 +27,7 @@
 				"I tried to kill it, but it ran out and into the woods, just east of here, I think it's got a nest down by the river.",
 				"Do you reckon you could go an kill the nest, I don't want them coming back and hurting my family."],
 		"options":["1. Sure thing, anything for another citizen of the realm", "2. And the reward?"],
+		"functions":[],
 		"branches":["questone_accepted", "questone_reward"]
 	},
 	"questone_declined":{
