@@ -19,6 +19,7 @@ using json = nlohmann::json;
 void LeaveSpace(void)
 {
 	cout << string(50, '\n');
+	
 }
 
 class Wallet
@@ -112,12 +113,10 @@ void StoryBranch(string _branch, json _j, Player* _player)
 		int Choice;
 		cin >> Choice;
 		LeaveSpace();
-		//TODO move for loop for functions and run them all
 		StoryBranch(_j[_branch][JsonStoryTag::branches][Choice - 1], _j, _player);
 	}
 	else
 	{
-		//TODO run all functions in array
 		StoryBranch(_j[_branch][JsonStoryTag::branches][0], _j, _player);
 	}
 }
