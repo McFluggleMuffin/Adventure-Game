@@ -9,5 +9,6 @@ class JsonStoryTag
 		static const std::string branches;
 		static const std::string functions;
 		static const std::string options;
+		static const std::string parameters;
 };
 #endif

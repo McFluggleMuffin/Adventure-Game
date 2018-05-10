@@ -5,7 +5,8 @@
 		"options":["1. Polietly decline, you've had a long day and can't bear to make it longer",
 				 "2. Ask for more Details, you can't accept without them.",
 				 "3. You had me at money!"],
-		"functions":[],
+		"functions":["Shout", "Shout"],
+		"parameters":[["1","2","3"], ["Hello"]],
 		"branches":["questone_declined","questone_moredetails", "questone_hadmeatmoney"]
 	},
 	"questone_hadmeatmoney":{
@@ -13,12 +14,14 @@
 				"Go and clear the cave out, and I'll reward you handsomely"],
 		"options":[],
 		"functions":[],	
+		"parameters":[],
 		"branches":["questone_accepted"]
 	},
 	"questone_accepted":{
 		"narrative":["Tell you what, I'll let you stay cheaper tonight, as a sort of pre-payment if you will"],
 		"options":[],
 		"functions":[],
+		"parameters":[],
 		"branches":[]
 	},
 	"questone_moredetails":{
@@ -28,9 +31,14 @@
 				"Do you reckon you could go an kill the nest, I don't want them coming back and hurting my family."],
 		"options":["1. Sure thing, anything for another citizen of the realm", "2. And the reward?"],
 		"functions":[],
+		"parameters":[],
 		"branches":["questone_accepted", "questone_reward"]
 	},
 	"questone_declined":{
-		"narrative":["Aw well, fair enough", "If you're looking to stay the night, I can get you a room, otherwise the bar is just around the corner"]
+		"narrative":["Aw well, fair enough", "If you're looking to stay the night, I can get you a room, otherwise the bar is just around the corner"],
+		"options":[],
+		"functions":[],
+		"parameters":[],
+		"branches":[]
 	}
 }

@@ -2,6 +2,7 @@
 #include<string>
 #include<vector>
 #include<fstream>
+#include<map>
 
 #include "Main.hpp"
 #include "nlohmann/json.hpp"
@@ -9,6 +10,7 @@ const std::string JsonStoryTag::narrative = "narrative";
 const std::string JsonStoryTag::branches = "branches";
 const std::string JsonStoryTag::options = "options";
 const std::string JsonStoryTag::functions = "functions";
+const std::string JsonStoryTag::parameters = "parameters";
 
 using namespace std;
 
@@ -74,20 +76,34 @@ Player* Player::make_player(int Choice, string N)
 	return NULL;
 }
 
-void StoryBranch(string _branch, json _j)
+void shout(string _branch, json _j, Player* _player, int index)
 {
+	vector<string> PARAMS = _j[_branch][JsonStoryTag::parameters][index].get<std::vector<string>>();
+	for (auto child : PARAMS)
+	{
+		cout << child << endl;
+	}
+}
+
+void StoryBranch(string _branch, json _j, Player* _player)
+{
+	std::map<std::string, std::function<void(string _branch, json _j, Player* _player, int index)>> funcMap; 
+	funcMap["Shout"] = shout;
+
 	vector<string> NARRATIVE = _j[_branch][JsonStoryTag::narrative].get<std::vector<string>>();
 	for (auto child : NARRATIVE)
 	{
 		cout << child << endl;
 	}
 	vector<string> FUNCTIONS = _j[_branch][JsonStoryTag::functions].get<std::vector<string>>();
+	int index = 0;
 	for (auto child : FUNCTIONS)
 	{
-		//TODO run functions based on strings in FUNCTIONS
+		funcMap[child](_branch, _j, _player, index);
+		index ++;
 	}
 	vector<string> OPTIONS = _j[_branch][JsonStoryTag::options].get<std::vector<string>>();
-	if (OPTIONS.size() == 0)
+	if (OPTIONS.size() != 0)
 	{
 		for (auto child : OPTIONS)
 		{
@@ -97,12 +113,12 @@ void StoryBranch(string _branch, json _j)
 		cin >> Choice;
 		LeaveSpace();
 		//TODO move for loop for functions and run them all
-		StoryBranch(_j[_branch][JsonStoryTag::branches][Choice - 1], _j);
+		StoryBranch(_j[_branch][JsonStoryTag::branches][Choice - 1], _j, _player);
 	}
 	else
 	{
 		//TODO run all functions in array
-		StoryBranch(_j[_branch][JsonStoryTag::branches][0], _j);
+		StoryBranch(_j[_branch][JsonStoryTag::branches][0], _j, _player);
 	}
 }
 
@@ -118,6 +134,7 @@ int main(void)
 	
 	string UnserializedJSON;	
 	json Branches;
+	Player* _player;	
 
 	ifstream Infile;
 	Infile.open("dialogue_EN.json");
@@ -126,6 +143,6 @@ int main(void)
 	Infile.close();	
 	vector<string> temp;	
 	LeaveSpace();
-	StoryBranch("entrypoint", Branches);
+	StoryBranch("entrypoint", Branches, _player);
 	return 0;
 }
