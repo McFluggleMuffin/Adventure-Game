@@ -96,10 +96,12 @@ void StoryBranch(string _branch, json _j)
 		int Choice;
 		cin >> Choice;
 		LeaveSpace();
+		//TODO move for loop for functions and run them all
 		StoryBranch(_j[_branch][JsonStoryTag::branches][Choice - 1], _j);
 	}
 	else
 	{
+		//TODO run all functions in array
 		StoryBranch(_j[_branch][JsonStoryTag::branches][0], _j);
 	}
 }
