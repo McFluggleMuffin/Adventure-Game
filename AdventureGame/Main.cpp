@@ -6,19 +6,22 @@
 
 #include "Main.hpp"
 #include "nlohmann/json.hpp"
-const std::string JsonStoryTag::narrative = "narrative";
-const std::string JsonStoryTag::branches = "branches";
-const std::string JsonStoryTag::options = "options";
-const std::string JsonStoryTag::functions = "functions";
-const std::string JsonStoryTag::parameters = "parameters";
 
 using namespace std;
+
+const string JsonStoryTag::narrative = "narrative";
+const string JsonStoryTag::branches = "branches";
+const string JsonStoryTag::options = "options";
+const string JsonStoryTag::functions = "functions";
+const string JsonStoryTag::parameters = "parameters";
+
 
 using json = nlohmann::json;
 
 void LeaveSpace(void)
 {
 	cout << string(50, '\n');
+	
 }
 
 class Wallet
@@ -93,10 +96,9 @@ void enter(string _branch, json _j, Player* _player, int index)
 
 void StoryBranch(string _branch, json _j, Player* _player)
 {
-	std::map<std::string, std::function<void(string _branch, json _j, Player* _player, int index)>> funcMap; 
-	funcMap["Shout"] = shout;
-	funcMap["Enter"] = enter;
-
+	std::map<std::string, std::function<void(string _branch, json _j, Player* _player, int index)>> FUNCMAP;
+	FUNCMAP["Shout"] = shout;
+	FUNCMAP["Enter"] = enter; 
 	vector<string> NARRATIVE = _j[_branch][JsonStoryTag::narrative].get<std::vector<string>>();
 	for (auto child : NARRATIVE)
 	{
@@ -106,7 +108,7 @@ void StoryBranch(string _branch, json _j, Player* _player)
 	int index = 0;
 	for (auto child : FUNCTIONS)
 	{
-		funcMap[child](_branch, _j, _player, index);
+		FUNCMAP[child](_branch, _j, _player, index);
 		index ++;
 	}
 	vector<string> OPTIONS = _j[_branch][JsonStoryTag::options].get<std::vector<string>>();
@@ -142,7 +144,6 @@ int main(void)
 	string UnserializedJSON;	
 	json Branches;
 	Player* _player;	
-
 	ifstream Infile;
 	Infile.open("dialogue_EN.json");
 	cout << "Loading" << endl;
