@@ -9,6 +9,12 @@
 		"branches":["questone_entrypoint"]
 	},
 	"questone_entrypoint":{
+		"narrative":["You enter the inn, and are greeted by the sound of merry drinking in the next room over",
+				"It's warm in here, and you are greeted by a large man at the front desk"],
+		"functions":["Enter"],
+		"branches":["questone_initialdialogue"]
+	},
+	"questone_initialdialogue":{
 		"narrative":["Welcome to the Bearded Lady inn, I'm Gregor Karlsson!",
 				 "Listen, a man such as you wouldn't be looking to make some extra change would you?"], 
 		"options":["1. Polietly decline, you've had a long day and can't bear to make it longer",
@@ -27,7 +33,7 @@
 		"branches":["questone_accepted"]
 	},
 	"questone_accepted":{
-		"narrative":["Tell you what, I'll let you stay cheaper tonight, as a sort of pre-payment if you will"],
+		"narrative":["Ahh, thank you kind sir", "Tell you what, I'll let you stay for free tonight, as a sort of pre-payment if you will"],
 		"options":[],
 		"functions":[],
 		"parameters":[],
