@@ -1,12 +1,21 @@
 {
 	"entrypoint":{
+		"narrative":["You are wondering down the winding path through <PlaceName> woods", 
+				"It's been a long day on the road, and day is turning to night, when you see the light of a tavern through the trees",
+				"You decide to go in, needed the rest and the mead. As you enter, you read a sign on the door, 'adventurers wanted'"],
+		"options":[],
+		"functions":["Enter"],
+		"parameters":[],
+		"branches":["questone_entrypoint"]
+	},
+	"questone_entrypoint":{
 		"narrative":["Welcome to the Bearded Lady inn, I'm Gregor Karlsson!",
 				 "Listen, a man such as you wouldn't be looking to make some extra change would you?"], 
 		"options":["1. Polietly decline, you've had a long day and can't bear to make it longer",
 				 "2. Ask for more Details, you can't accept without them.",
 				 "3. You had me at money!"],
-		"functions":["Shout", "Shout"],
-		"parameters":[["1","2","3"], ["Hello"]],
+		"functions":[],
+		"parameters":[],
 		"branches":["questone_declined","questone_moredetails", "questone_hadmeatmoney"]
 	},
 	"questone_hadmeatmoney":{

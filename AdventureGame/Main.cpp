@@ -84,11 +84,18 @@ void shout(string _branch, json _j, Player* _player, int index)
 		cout << child << endl;
 	}
 }
+void enter(string _branch, json _j, Player* _player, int index)
+{
+	cout << "\n ENTER to continue" << endl;
+	getchar();
+	LeaveSpace();
+}
 
 void StoryBranch(string _branch, json _j, Player* _player)
 {
 	std::map<std::string, std::function<void(string _branch, json _j, Player* _player, int index)>> funcMap; 
 	funcMap["Shout"] = shout;
+	funcMap["Enter"] = enter;
 
 	vector<string> NARRATIVE = _j[_branch][JsonStoryTag::narrative].get<std::vector<string>>();
 	for (auto child : NARRATIVE)
@@ -112,12 +119,10 @@ void StoryBranch(string _branch, json _j, Player* _player)
 		int Choice;
 		cin >> Choice;
 		LeaveSpace();
-		//TODO move for loop for functions and run them all
 		StoryBranch(_j[_branch][JsonStoryTag::branches][Choice - 1], _j, _player);
 	}
 	else
 	{
-		//TODO run all functions in array
 		StoryBranch(_j[_branch][JsonStoryTag::branches][0], _j, _player);
 	}
 }
