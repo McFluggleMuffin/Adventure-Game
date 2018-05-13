@@ -5,7 +5,6 @@
 				"You decide to go in, needed the rest and the mead. As you enter, you read a sign on the door, 'adventurers wanted'"],
 		"options":[],
 		"functions":["Enter"],
-		"parameters":[],
 		"branches":["questone_entrypoint"]
 	},
 	"questone_entrypoint":{
@@ -22,7 +21,6 @@
 				 "Ask for more Details, you can't accept without them.",
 				 "Did he say money?!"],
 		"functions":[],
-		"parameters":[],
 		"branches":["questone_declined","questone_moredetails", "questone_hadmeatmoney"]
 	},
 	"questone_hadmeatmoney":{
@@ -30,15 +28,13 @@
 				"Go and clear the cave out, and I'll reward you handsomely"],
 		"options":["Money is always good", "You think you'll give it a pass, spiders are dangerous"],
 		"functions":[],	
-		"parameters":[],
 		"branches":["questone_accepted", "questone_declined"]
 	},
 	"questone_accepted":{
 		"narrative":["Ahh, thank you kind sir", "Tell you what, I'll let you stay for free tonight, as a sort of pre-payment if you will"],
 		"options":[],
 		"functions":[],
-		"parameters":[],
-		"branches":[]
+		"branches":["beardedlady_reception"]
 	},
 	"questone_moredetails":{
 		"narrative":["My daughter Bessy said she saw something down in the cellar the other day, something large.",
@@ -51,21 +47,24 @@
 	},
 	"questone_reward":{
 		"narrative":["Ah, of course", "Well if you kill them all, and make sure they never bother us again, I'll give you twenty gold pieces"],
-		"options":["Alright, im in", "", "Only twenty? You're having a laugh"]
+		"options":["Sounds good, you'll return when you're done", "", "Only twenty? You're having a laugh"]
 	},
 	"questone_declined":{
 		"narrative":["Aw well, fair enough, come chat if you change your mind"],
 		"options":[],
 		"functions":[],
-		"parameters":[],
 		"branches":["beardedlady_reception"]
 	},
 	"questone_return":{
+		"narrative":["Ahh, so you are interested?"],
+		"options":["Yeah, turns out I need the money anyway", "No, sorry, I've changed my mind again"],
+		"functions":[],
+		"branches":["questone_accepted", "questone_declined"]
 	},
 	"beardedlady_reception":{
 		"narrative":["If you're looking to stay the night, I can get you a room, otherwise the bar is just around the corner"],
-		"options":["Head to the bar for a drink", "Enquire about staying the night", "Talk to gregor"],
+		"options":["Head to the bar for a drink", "Enquire about staying the night", "Talk to Gregor"],
 		"functions":[],
-		"branches":["","",""]
+		"branches":["beardedlady_bar","beardedlady_buyaroom","questone_return"]
 	}
 }
