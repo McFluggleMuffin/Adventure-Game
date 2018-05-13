@@ -4,7 +4,7 @@
 #include<fstream>
 #include<map>
 
-#include "Main.hpp"
+#include "main.hpp"
 #include "nlohmann/json.hpp"
 
 using namespace std;
