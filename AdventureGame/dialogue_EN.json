@@ -5,73 +5,67 @@
 				"You decide to go in, needed the rest and the mead. As you enter, you read a sign on the door, 'adventurers wanted'"],
 		"options":[],
 		"functions":["Enter"],
-		"parameters":[],
 		"branches":["questone_entrypoint"]
 	},
 	"questone_entrypoint":{
 		"narrative":["You enter the inn, and are greeted by the sound of merry drinking in the next room over",
-				"It's warm in here, and you are greeted by a large man at the front desk"],
+				"It's warm in here, and a large man stands at the front desk"],
 		"functions":["Enter"],
+		"options":[],
 		"branches":["questone_initialdialogue"]
 	},
 	"questone_initialdialogue":{
 		"narrative":["Welcome to the Bearded Lady inn, I'm Gregor Karlsson!",
 				 "Listen, a man such as you wouldn't be looking to make some extra change would you?"], 
-		"options":["1. Polietly decline, you've had a long day and can't bear to make it longer",
-				 "2. Ask for more Details, you can't accept without them.",
-				 "3. You had me at money!"],
+		"options":["Polietly decline, you've had a long day and can't bear to make it longer",
+				 "Ask for more Details, you can't accept without them.",
+				 "Did he say money?!"],
 		"functions":[],
-		"parameters":[],
 		"branches":["questone_declined","questone_moredetails", "questone_hadmeatmoney"]
 	},
 	"questone_hadmeatmoney":{
-		"narrative":["Ah, good, there's a spider nest down by the river to the east, some huge spiders live there",
+		"narrative":["Ah, good, see, there's a spider nest down by the river to the east, some huge spiders live there",
 				"Go and clear the cave out, and I'll reward you handsomely"],
-		"options":[],
+		"options":["Money is always good", "You think you'll give it a pass, spiders are dangerous"],
 		"functions":[],	
-		"parameters":[],
-		"branches":["questone_accepted"]
+		"branches":["questone_accepted", "questone_declined"]
 	},
 	"questone_accepted":{
 		"narrative":["Ahh, thank you kind sir", "Tell you what, I'll let you stay for free tonight, as a sort of pre-payment if you will"],
 		"options":["1. Thank you very much", "2. Blankly stare at the innkeeper"],
 		"functions":[],
-		"parameters":[],
-		"branches":["questone_start","stare"]
+		"branches":["beardedlady_reception"]
 	},
 	"questone_moredetails":{
 		"narrative":["My daughter Bessy said she saw something down in the cellar the other day, something large.",
 				"Being the man here, I went down to check it out.", "Turned out to be some large spider, about two feet in height.",
-				"I tried to kill it, but it ran out and into the woods, just east of here, I think it's got a nest down by the river.",
-				"Do you reckon you could go an kill the nest, I don't want them coming back and hurting my family."],
-		"options":["1. Sure thing, anything for another citizen of the realm", "2. And the reward?"],
+				"I tried to kill it, but it ran out and into the woods, heading east of here, I think it's got a nest down by the river.",
+				"Do you reckon you could go an kill the nest? I don't want them coming back and hurting my family."],
+		"options":["Of course you'll help", "And the reward?"],
 		"functions":[],
-		"parameters":[],
 		"branches":["questone_accepted", "questone_reward"]
 	},
+	"questone_reward":{
+		"narrative":["Ah, of course", "Well if you kill them all, and make sure they never bother us again, I'll give you twenty gold pieces"],
+		"options":["Sounds good, you'll return when you're done", "", "Only twenty? You're having a laugh"]
+	},
 	"questone_declined":{
-		"narrative":["Aw well, fair enough", "If you're looking to stay the night, I can get you a room, otherwise the bar is just around the corner"],
+		"narrative":["Aw well, fair enough, come chat if you change your mind"],
 		"options":[],
 		"functions":[],
 		"parameters":[],
-		"branches":[]
+		"branches":["beardedlady_reception"]
 	},
-	"stare":{
-		"narrative":["Come on those spiders won't kill themselves!"],
-		"options":[],
+	"questone_return":{
+		"narrative":["Ahh, so you are interested?"],
+		"options":["Yeah, turns out I need the money anyway", "No, sorry, I've changed my mind again"],
 		"functions":[],
-		"parameters":[],
-		"branches":["questone_start"]
+		"branches":["questone_accepted", "questone_declined"]
 	},
-	"questone_start":{
-		"narrative":["You start walking down the river and on your way there you encounter a stray dog"],
-		"options":["1. Avoid the dog and continue into the spider's nest", "2. Attempt to tame the dog"],
+	"beardedlady_reception":{
+		"narrative":["If you're looking to stay the night, I can get you a room, otherwise the bar is just around the corner"],
+		"options":["Head to the bar for a drink", "Enquire about staying the night", "Talk to Gregor"],
 		"functions":[],
-		"parameters":[],
-		"branches":[]
-	},
-	"dog_tame":{
-
-
+		"branches":["beardedlady_bar","beardedlady_buyaroom","questone_return"]
 	}
 }

@@ -4,7 +4,7 @@
 #include<fstream>
 #include<map>
 
-#include "Main.hpp"
+#include "main.hpp"
 #include "nlohmann/json.hpp"
 
 using namespace std;
@@ -89,7 +89,7 @@ void shout(string _branch, json _j, Player* _player, int index)
 }
 void enter(string _branch, json _j, Player* _player, int index)
 {
-	cout << "\n ENTER to continue" << endl;
+	cout << "\nENTER to continue" << endl;
 	getchar();
 	LeaveSpace();
 }
@@ -118,7 +118,7 @@ void StoryBranch(string _branch, json _j, Player* _player)
 		for (auto child : OPTIONS)
 		{
 			index++;
-			cout << child << endl;
+			cout << index << ". " << child << endl;
 		}
 		int Choice;
 		cin >> Choice;
