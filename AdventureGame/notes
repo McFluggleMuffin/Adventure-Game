@@ -5,7 +5,7 @@ Each branch in the dialogue file has subsections, these are explained here
 Narrative -> These lines are printed to the console as information or context for the player, they bear no relevance on the code or the rest of the branch
 Options -> These are the options the user has to choose between, and should line up with the items in branches
 Functions -> These are functions that are run when the program enters the branch
-Parameters -> This is a two dimensional array, that lines up with the functions member, as it contains the parameters used for the functions to be called
+(Parameters) -> This is a two dimensional array, that lines up with the functions member, as it contains the parameters used for the functions to be called
 Branches -> The next branches to be called, based on the option selected
 
 
