@@ -67,5 +67,13 @@
 		"options":["Head to the bar for a drink", "Enquire about staying the night", "Talk to Gregor"],
 		"functions":[],
 		"branches":["beardedlady_bar","beardedlady_buyaroom","questone_return"]
+	},
+	"beardedlady_bar":{
+		"narrative":["You enter the bar, and are met with a dismal scene", 
+				"Only a few patrons grace the bar, the most notable being a small man in one of the booths"],
+		"options":["Approach the bar", "Return to the front desk"],
+		"functions":[],
+		"branches":["", "beardedlady_reception"]
 	}
+
 }
