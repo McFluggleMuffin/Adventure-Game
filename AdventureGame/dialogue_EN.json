@@ -32,7 +32,7 @@
 	},
 	"questone_accepted":{
 		"narrative":["Ahh, thank you kind sir", "Tell you what, I'll let you stay for free tonight, as a sort of pre-payment if you will"],
-		"options":["1. Thank you very much", "2. Blankly stare at the innkeeper"],
+		"options":[],
 		"functions":[],
 		"branches":["beardedlady_reception"]
 	},
