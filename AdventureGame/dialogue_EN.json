@@ -53,6 +53,7 @@
 		"narrative":["Aw well, fair enough, come chat if you change your mind"],
 		"options":[],
 		"functions":[],
+		"parameters":[],
 		"branches":["beardedlady_reception"]
 	},
 	"questone_return":{
