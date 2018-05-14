@@ -34,10 +34,10 @@
 	},
 	"questone_accepted":{
 		"narrative":["Ahh, thank you kind sir", "Tell you what, I'll let you stay for free tonight, as a sort of pre-payment if you will"],
-		"options":[],
+		"options":["1. Thank you very much", "2. Blankly stare at the innkeeper"],
 		"functions":[],
 		"parameters":[],
-		"branches":[]
+		"branches":["questone_start","stare"]
 	},
 	"questone_moredetails":{
 		"narrative":["My daughter Bessy said she saw something down in the cellar the other day, something large.",
@@ -55,5 +55,23 @@
 		"functions":[],
 		"parameters":[],
 		"branches":[]
+	},
+	"stare":{
+		"narrative":["Come on those spiders won't kill themselves!"],
+		"options":[],
+		"functions":[],
+		"parameters":[],
+		"branches":["questone_start"]
+	},
+	"questone_start":{
+		"narrative":["You start walking down the river and on your way there you encounter a stray dog"],
+		"options":["1. Avoid the dog and continue into the spider's nest", "2. Attempt to tame the dog"],
+		"functions":[],
+		"parameters":[],
+		"branches":[]
+	},
+	"dog_tame":{
+
+
 	}
 }
