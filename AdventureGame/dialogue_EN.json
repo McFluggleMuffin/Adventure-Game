@@ -47,7 +47,7 @@
 	},
 	"questone_reward":{
 		"narrative":["Ah, of course", "Well if you kill them all, and make sure they never bother us again, I'll give you twenty gold pieces"],
-		"options":["Sounds good, you'll return when you're done", "", "Only twenty? You're having a laugh"],
+		"options":["Sounds good, you'll return when you're done", "Wait kill them? You're out", "Only twenty? You're having a laugh"],
 		"functions":[],
 		"branches":["questone_accepted", "questone_declined"]
 	},
