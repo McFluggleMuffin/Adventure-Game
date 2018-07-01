@@ -1,6 +1,6 @@
 {
 	"entrypoint":{
-		"narrative":["You are wondering down the winding path through <PlaceName> woods", 
+		"narrative":["You are wondering down the winding path through Kilvar woods", 
 				"It's been a long day on the road, and day is turning to night, when you see the light of a tavern through the trees",
 				"You decide to go in, needed the rest and the mead. As you enter, you read a sign on the door, 'adventurers wanted'"],
 		"options":[],
