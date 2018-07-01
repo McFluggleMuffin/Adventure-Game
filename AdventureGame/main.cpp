@@ -140,7 +140,6 @@ void Entry(void)
 
 int main(void)
 {
-	
 	string UnserializedJSON;	
 	json Branches;
 	Player* _player;	
